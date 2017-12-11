@@ -1,5 +1,7 @@
 import {Component} from "@angular/core";
 import {Product} from "./Product";
+import {ProductService} from "./product.service";
+import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 
 @Component({
     selector: 'product-list',
@@ -17,10 +19,20 @@ import {Product} from "./Product";
     styles: ['div {border: 1px solid green; text-align: left}']
 })
 
-export class ProductListComponent {
-    products: Product[] = [new Product('iPhone', 1000, 'iPhone X'), 
-    new Product('iPad',1000, 'latest'), new Product('AppleTV', 2000, 'Nice')];
+export class ProductListComponent implements OnInit {
     selectedProduct: Product;
+
+    products: Product[];
+    
+    constructor(private productService: ProductService){};
+
+    ngOnInit(){
+        this.getProducts();
+    }
+
+    getProducts(): void {
+        this.productService.getProducts().subscribe(products => this.products = products);
+    }
 
     delete(product: Product){
         this.products.splice(this.products.indexOf(product), 1);

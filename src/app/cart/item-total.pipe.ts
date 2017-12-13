@@ -7,12 +7,12 @@ import { Product } from '../Product';
 })
 export class ItemTotalPipe implements PipeTransform {
 
-  transform(item: CartItem, qty: number = 0) {
-    return item.product.price * qty;
-  }
-
-  // transform(item: Product, qty: number = 0) {
-  //   return item.price * qty;
+  // transform(item: CartItem, qty: number = 0) {
+  //   return item.product.price * qty;
   // }
+
+  transform(item: Product, qty: number = 0) {
+    return item.price * qty;
+  }
 
 }

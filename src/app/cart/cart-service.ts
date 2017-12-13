@@ -11,7 +11,7 @@ export class CartService {
     }
 
     addToCart(product: Product){
-        //this.cart.addToMap(product);
-        this.cart.add(product);
+        this.cart.addToMap(product);
+        //this.cart.add(product);
     }
 }

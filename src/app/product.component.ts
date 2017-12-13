@@ -1,11 +1,13 @@
-import {Component} from "@angular/core";
-import {Product} from "./Product";
-import {ProductService} from "./product.service";
+import { Component } from "@angular/core";
+import { Product } from "./Product";
+import { ProductService } from "./product.service";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 
 @Component({
     selector: 'product-list',
-    template:`<div>
+    template: `<div>
+    <cart (click)="toggleShowCart()"></cart>
+    <cart-detail *ngIf="showCart"></cart-detail>
         <ul>
             <li *ngFor="let product of products; let i=index" (click)="selectedProduct = product">
                 {{i+1}}: {{product.name}}
@@ -23,10 +25,13 @@ export class ProductListComponent implements OnInit {
     selectedProduct: Product;
 
     products: Product[];
-    
-    constructor(private productService: ProductService){};
 
-    ngOnInit(){
+    showCart: boolean;
+
+
+    constructor(private productService: ProductService) { };
+
+    ngOnInit() {
         this.getProducts();
     }
 
@@ -34,7 +39,11 @@ export class ProductListComponent implements OnInit {
         this.productService.getProducts().subscribe(products => this.products = products);
     }
 
-    delete(product: Product){
+    delete(product: Product) {
         this.products.splice(this.products.indexOf(product), 1);
+    }
+
+    toggleShowCart() {
+        this.showCart = !this.showCart;
     }
 }

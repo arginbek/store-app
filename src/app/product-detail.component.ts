@@ -3,8 +3,11 @@ import { Input, Output } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import {NgModel} from "@angular/forms";
 import { Product } from "./Product";
+import { CartService } from "./cart/cart-service";
+import { ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'product-detail',
     template: `
         <ul *ngIf="product">
@@ -19,11 +22,14 @@ import { Product } from "./Product";
             <input [(ngModel)]="product.description">
         </div>
         <button (click)="requestDelete()">delete</button>
+        <button (click)="addToCart()">Add to cart</button>
     `,
     styles: ['ul .heading {font-weight: normal; list-style: none;}']
 })
 
 export class ProductDetailComponent {
+    constructor(private cartService: CartService){}
+
     @Input()
     product: Product;
 
@@ -32,5 +38,9 @@ export class ProductDetailComponent {
 
     requestDelete() {
         this.deleteProduct.emit(this.product);
+    }
+
+    addToCart(){
+        this.cartService.addToCart(this.product);
     }
 }

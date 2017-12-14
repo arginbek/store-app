@@ -10,7 +10,7 @@ export function productIdValidator(id: string): AsyncValidatorFn{
                 }else{
                     resolve(null);
                 }
-            }, 0)
+            }, 1000)
         })
     }
 }

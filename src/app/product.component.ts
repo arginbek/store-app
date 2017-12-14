@@ -25,16 +25,12 @@ import { NgForm } from "@angular/forms/src/directives/ng_form";
     </div>
     <div>
         <form #form="ngForm" (ngSubmit)=submit(form)>
-            <div *ngIf="form.errors" class="alert alert-danger">
-                <div *ngIf="productID.errors?.required">Product ID is required.</div>
-                <div *ngIf="productID.errors?.validProductId">Product ID is required.</div>
-            </div>
             <div class="form_grou">
                 <label for="product_id">Product ID</label>
                 <input required [validProductId]="'P123'" ngModel name="id" #productID="ngModel" id="product_id" type="text" class="form-control">
                 <div class="alert alert-danger" *ngIf="productID.touched && !productID.valid">
                     <div *ngIf="productID.errors?.required">Product ID is required.</div>
-                    <div *ngIf="productID.errors?.validProductId">Product ID is required.</div>
+                    <div *ngIf="productID.errors?.id">P123 is not a valid ID.</div>
                 </div>
                 <label for="product_name">Product Name</label>
                 <input ngModel name="name" #productName="ngModel" id="product_name" type="text" class="form-control">

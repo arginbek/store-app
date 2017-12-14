@@ -8,15 +8,16 @@ import { ProductDetailComponent } from './product-detail.component';
 import { FormsModule } from '@angular/forms';
 import {ProductService} from './product.service';
 import { CartModule } from './cart/cart.module';
+import { ProductIdValidatorDirective } from './validators/product-id.validator.directive';
 
 @NgModule({
   declarations: [
-    AppComponent, ProductListComponent, ProductDetailComponent
+    AppComponent, ProductListComponent, ProductDetailComponent, ProductIdValidatorDirective
   ],
   imports: [
     BrowserModule, FormsModule, CartModule
   ],
-  providers: [ProductService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

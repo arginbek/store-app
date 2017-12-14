@@ -5,7 +5,7 @@ import { Product } from '../Product';
 
 @Component({
   selector: 'cart-detail',
-  template: `<table>
+  template: `<table class="table table-striped">
   <tr>
       <th>Name</th>
       <th>Quantity</th>
